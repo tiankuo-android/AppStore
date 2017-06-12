@@ -1,13 +1,16 @@
 package com.atguigu.tiankuo.appstore.homefragment;
 
 import android.content.Context;
+import android.os.Handler;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.atguigu.tiankuo.appstore.R;
@@ -20,6 +23,10 @@ import com.zhy.magicviewpager.transformer.ScaleInTransformer;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import butterknife.ButterKnife;
+import butterknife.InjectView;
+import cn.iwgang.countdownview.CountdownView;
 
 /**
  * 作者：田阔
@@ -81,11 +88,11 @@ public class HomeAdapter extends RecyclerView.Adapter {
             return new ChannelViewHolder(mContext, inflater.inflate(R.layout.channel_item, null));
         } else if (viewType == ACT) {
             return new ActViewHolder(mContext, inflater.inflate(R.layout.act_item, null));
-        }  /*else if (viewType == SECKILL) {
+        } else if (viewType == SECKILL) {
             return new SeckillViewHolder(mContext, inflater.inflate(R.layout.seckill_item, null));
         } else if (viewType == RECOMMEND) {
             return new RecommendViewHolder(mContext, inflater.inflate(R.layout.recommend_item, null));
-        } else if (viewType == HOT) {
+        }/* else if (viewType == HOT) {
             return new HotViewHolder(mContext, inflater.inflate(R.layout.hot_item, null));
         }*/
         return null;
@@ -103,13 +110,13 @@ public class HomeAdapter extends RecyclerView.Adapter {
         } else if (getItemViewType(position) == ACT) {
             ActViewHolder actViewHolder = (ActViewHolder) holder;
             actViewHolder.setData(datas.getAct_info());
-        } /* else if (getItemViewType(position) == SECKILL) {
+        } else if (getItemViewType(position) == SECKILL) {
             SeckillViewHolder seckillViewHolder = (SeckillViewHolder) holder;
             seckillViewHolder.setData(datas.getSeckill_info());
-        } else if (getItemViewType(position) == RECOMMEND) {
+        }  else if (getItemViewType(position) == RECOMMEND) {
             RecommendViewHolder recommendViewHolder = (RecommendViewHolder) holder;
             recommendViewHolder.setData(datas.getRecommend_info());
-        } else if (getItemViewType(position) == HOT) {
+        } /* else if (getItemViewType(position) == HOT) {
             HotViewHolder hotViewHolder = (HotViewHolder) holder;
             hotViewHolder.setData(datas.getHot_info());
         }*/
@@ -117,7 +124,7 @@ public class HomeAdapter extends RecyclerView.Adapter {
 
     @Override
     public int getItemCount() {
-        return 3;
+        return 5;
     }
 
     class BannerViewHolder extends RecyclerView.ViewHolder {
@@ -183,19 +190,132 @@ public class HomeAdapter extends RecyclerView.Adapter {
         }
 
         public void setData(final List<HomeBean.ResultBean.ActInfoBean> act_info) {
-            ViewPagerAdapter adapter = new ViewPagerAdapter(mContext,act_info);
+            ViewPagerAdapter adapter = new ViewPagerAdapter(mContext, act_info);
             act_viewpager.setAdapter(adapter);
 
             act_viewpager.setPageMargin(20);
-            act_viewpager.setPageTransformer(true,new RotateDownPageTransformer(new AlphaPageTransformer(new ScaleInTransformer())));
+            act_viewpager.setPageTransformer(true, new RotateDownPageTransformer(new AlphaPageTransformer(new ScaleInTransformer())));
 
-            adapter.setOnItemOnClickListener(new ViewPagerAdapter.OnItemClickListener(){
+            adapter.setOnItemOnClickListener(new ViewPagerAdapter.OnItemClickListener() {
                 @Override
-                public void onItemClick(int position){
+                public void onItemClick(int position) {
                     HomeBean.ResultBean.ActInfoBean actInfoBean = act_info.get(position);
                     Toast.makeText(mContext, "" + actInfoBean.getName(), Toast.LENGTH_SHORT).show();
                 }
             });
+        }
+    }
+
+    /**
+     * 是否是第一次启动倒计时
+     */
+    private boolean isFrist = false;
+
+    class SeckillViewHolder extends RecyclerView.ViewHolder {
+
+        private final Context mContext;
+        @InjectView(R.id.countdownview)
+        CountdownView countdownview;
+        @InjectView(R.id.tv_more_seckill)
+        TextView tvMoreSeckill;
+        @InjectView(R.id.rv_seckill)
+        RecyclerView rvSeckill;
+
+        SeckillRecyclerViewAdapter adapter;
+
+        Handler mHandler = new Handler();
+        HomeBean.ResultBean.SeckillInfoBean seckillInfo;
+
+        /**
+         * 开始刷新
+         */
+        void startRefreshTime() {
+            mHandler.postDelayed(mRefreshTimeRunnable, 1);
+        }
+
+        Runnable mRefreshTimeRunnable = new Runnable() {
+            @Override
+            public void run() {
+                //得到当前时间
+                long currentTime = System.currentTimeMillis();
+
+                if (currentTime >= Long.parseLong(seckillInfo.getEnd_time())) {
+                    // 倒计时结束
+                    mHandler.removeCallbacksAndMessages(null);
+                } else {
+                    //更新时间
+                    countdownview.updateShow(Long.parseLong(seckillInfo.getEnd_time()) - currentTime);
+                    //每隔1000毫秒更新一次
+                    mHandler.postDelayed(mRefreshTimeRunnable, 1000);
+                }
+
+            }
+        };
+
+
+        public SeckillViewHolder(Context mContext, View itemView) {
+            super(itemView);
+            this.mContext = mContext;
+            ButterKnife.inject(this, itemView);
+
+        }
+
+        public void setData(final HomeBean.ResultBean.SeckillInfoBean seckill_info) {
+            this.seckillInfo = seckill_info;
+            //1.已经有数据
+            //2.设置RecyclerView的适配器
+            adapter = new SeckillRecyclerViewAdapter(mContext, seckill_info);
+            rvSeckill.setAdapter(adapter);
+            //布局管理器
+            rvSeckill.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, false));
+
+
+            //3.设置item的点击事件
+            //接口
+            //回调
+            adapter.setOnSeckillRecyclerView(new SeckillRecyclerViewAdapter.OnSeckillRecyclerView() {
+                @Override
+                public void onItemClick(int position) {
+                    Toast.makeText(mContext, "position" + position, Toast.LENGTH_SHORT).show();
+                }
+            });
+
+            if (!isFrist) {
+                isFrist = true;
+                //计算倒计时持续的时间
+                long totalTime = Long.parseLong(seckill_info.getEnd_time()) - Long.parseLong(seckill_info.getStart_time());
+
+                // 校对倒计时
+                long curTime = System.currentTimeMillis();
+                //重新设置结束数据时间
+                seckillInfo.setEnd_time((curTime + totalTime + ""));
+
+                //开始刷新
+                startRefreshTime();
+            }
+        }
+    }
+
+    class RecommendViewHolder extends RecyclerView.ViewHolder {
+
+        private final Context mContext;
+        RecommendGridViewAdapter adapter;
+
+        @InjectView(R.id.tv_more_recommend)
+        TextView tvMoreRecommend;
+        @InjectView(R.id.gv_recommend)
+        GridView gvRecommend;
+
+        public RecommendViewHolder(Context mContext, View itemView) {
+            super(itemView);
+            this.mContext = mContext;
+            ButterKnife.inject(this, itemView);
+        }
+
+        public void setData(List<HomeBean.ResultBean.RecommendInfoBean> recommend_info) {
+            adapter = new RecommendGridViewAdapter(mContext,recommend_info);
+            gvRecommend.setAdapter(adapter);
+
         }
     }
 }
