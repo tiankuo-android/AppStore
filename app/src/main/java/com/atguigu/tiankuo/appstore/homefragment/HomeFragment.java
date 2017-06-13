@@ -1,7 +1,6 @@
 package com.atguigu.tiankuo.appstore.homefragment;
 
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.telecom.Call;
 import android.util.Log;
@@ -114,9 +113,6 @@ public class HomeFragment extends BaseFragment {
         HomeAdapter adapter = new HomeAdapter(mContext, homeBean.getResult());
         rvHome.setAdapter(adapter);
 
-        //设置布局管理器
-        LinearLayoutManager liner = new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false);
-        rvHome.setLayoutManager(liner);
         GridLayoutManager manager = new GridLayoutManager(getActivity(), 1);
 
         //设置滑动到哪个位置了的监听

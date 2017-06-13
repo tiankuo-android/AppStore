@@ -9,8 +9,6 @@ import java.io.Serializable;
  */
 
 public class GoodsBean implements Serializable {
-
-
     /**
      * cover_price : 159.00
      * figure : /1477984921265.jpg
@@ -21,18 +19,9 @@ public class GoodsBean implements Serializable {
     private String cover_price;
     private String figure;
     private String name;
-    /**
-     * 唯一标识
-     */
     private String product_id;
-    /**
-     * 在购物车的购买数量
-     */
     private int number = 1;
 
-    /**
-     * 默认是选择
-     */
     private boolean isChecked = true;
 
     public boolean isChecked() {
@@ -81,17 +70,5 @@ public class GoodsBean implements Serializable {
 
     public void setProduct_id(String product_id) {
         this.product_id = product_id;
-    }
-
-    @Override
-    public String toString() {
-        return "GoodsBean{" +
-                "cover_price='" + cover_price + '\'' +
-                ", figure='" + figure + '\'' +
-                ", name='" + name + '\'' +
-                ", product_id='" + product_id + '\'' +
-                ", number=" + number +
-                ", isChecked=" + isChecked +
-                '}';
     }
 }
