@@ -19,9 +19,13 @@
         </activity>
         <activity
             android:name=".MainActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize" />
-        <activity android:name=".app.GoodsInfoActivity" />
-        <activity android:name=".app.WebViewActivity"></activity>
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".app.GoodsInfoActivity"
+            android:launchMode="singleTask" />
+        <activity android:name=".app.WebViewActivity" />
+        <activity android:name=".shoppingcartfragment.CallCenterActivity"></activity>
     </application>
 
 </manifest>

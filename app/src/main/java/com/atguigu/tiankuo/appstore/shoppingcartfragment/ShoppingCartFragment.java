@@ -1,5 +1,6 @@
 package com.atguigu.tiankuo.appstore.shoppingcartfragment;
 
+import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -11,6 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.atguigu.tiankuo.appstore.MainActivity;
 import com.atguigu.tiankuo.appstore.R;
 import com.atguigu.tiankuo.appstore.base.BaseFragment;
 import com.atguigu.tiankuo.appstore.homefragment.GoodsBean;
@@ -167,13 +169,10 @@ public class ShoppingCartFragment extends BaseFragment {
                     adapter.checkAll();
                     //显示总价格
                     adapter.showTotalPrice();
-
                 }
             });
-//默认校验全选
+            //默认校验全选
             adapter.checkAll();
-
-
         } else {
             //没有数据-显示没有数据的页面
             llEmptyShopcart.setVisibility(View.VISIBLE);
@@ -228,6 +227,10 @@ public class ShoppingCartFragment extends BaseFragment {
                 break;
             case R.id.tv_empty_cart_tobuy:
                 Toast.makeText(mContext, "去逛逛", Toast.LENGTH_SHORT).show();
+
+                Intent intent = new Intent(mContext,MainActivity.class);
+                intent.putExtra("checkId",R.id. rb_home);
+                startActivity(intent);
                 break;
         }
     }

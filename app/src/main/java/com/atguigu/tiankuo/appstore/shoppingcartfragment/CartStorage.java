@@ -153,4 +153,8 @@ public class CartStorage {
         return list;
     }
 
+    public GoodsBean findDete(String product_id) {
+        return null;
+
+    }
 }
