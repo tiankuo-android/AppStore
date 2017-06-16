@@ -13,7 +13,7 @@ import com.atguigu.tiankuo.appstore.base.BaseFragment;
 import com.atguigu.tiankuo.appstore.communityfragment.CommunityFragment;
 import com.atguigu.tiankuo.appstore.homefragment.HomeFragment;
 import com.atguigu.tiankuo.appstore.shoppingcartfragment.ShoppingCartFragment;
-import com.atguigu.tiankuo.appstore.typefragment.TypeFragment;
+import com.atguigu.tiankuo.appstore.typefragment.fragment.TypeFragment;
 import com.atguigu.tiankuo.appstore.userfragment.UserFragment;
 
 import java.util.ArrayList;
@@ -122,7 +122,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
-        int id = intent.getIntExtra("checkedid",R.id.rb_home);
+        int id = intent.getIntExtra("checkId",R.id.rb_home);
         switch (id){
             case R.id.rb_home:
                 rgMain.check(R.id.rb_home);

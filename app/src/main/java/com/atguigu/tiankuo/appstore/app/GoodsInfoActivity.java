@@ -167,8 +167,8 @@ public class GoodsInfoActivity extends AppCompatActivity {
                 break;
             case R.id.tv_good_info_cart:
 //                Toast.makeText(this, "进入购物车", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(GoodsInfoActivity.this, MainActivity.class);
-                intent.putExtra("checkId", R.id.rb_home);
+                Intent intent = new Intent(this,MainActivity.class);
+                intent.putExtra("checkId",R.id.rb_cart);
                 startActivity(intent);
 
                 break;
