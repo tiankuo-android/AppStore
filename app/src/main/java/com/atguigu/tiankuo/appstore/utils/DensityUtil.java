@@ -1,4 +1,4 @@
-package com.atguigu.tiankuo.appstore.typefragment.utils;
+package com.atguigu.tiankuo.appstore.utils;
 
 import android.content.Context;
 

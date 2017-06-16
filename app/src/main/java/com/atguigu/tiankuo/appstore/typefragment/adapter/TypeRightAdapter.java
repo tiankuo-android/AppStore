@@ -21,7 +21,7 @@ import com.atguigu.tiankuo.appstore.domain.Constants;
 import com.atguigu.tiankuo.appstore.homefragment.GoodsBean;
 import com.atguigu.tiankuo.appstore.homefragment.HomeAdapter;
 import com.atguigu.tiankuo.appstore.typefragment.domain.TypeBean;
-import com.atguigu.tiankuo.appstore.typefragment.utils.DensityUtil;
+import com.atguigu.tiankuo.appstore.utils.DensityUtil;
 import com.bumptech.glide.Glide;
 
 import java.util.List;

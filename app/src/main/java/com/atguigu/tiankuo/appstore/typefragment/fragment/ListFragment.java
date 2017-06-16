@@ -40,7 +40,6 @@ public class ListFragment extends BaseFragment {
     @InjectView(R.id.rv_right)
     RecyclerView rvRight;
 
-    private TypeLeftAdapter adapter;
     private String[] titles = new String[]{"小裙子", "上衣", "下装", "外套", "配件", "包包", "装扮", "居家宅品",
             "办公文具", "数码周边", "游戏专区"};
     private static final String TAG = ListFragment.class.getSimpleName();
@@ -62,25 +61,23 @@ public class ListFragment extends BaseFragment {
     @Override
     public void initData() {
         super.initData();
-        adapter = new TypeLeftAdapter(mContext, titles);
-        lvLeft.setAdapter(adapter);
+        leftAdapter = new TypeLeftAdapter(mContext, titles);
+        lvLeft.setAdapter(leftAdapter);
         //设置监听点击ListView的item的点击事件，并且点击的时候变效果
         lvLeft.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 //1.记录点击的位置
-                adapter.setChangeSelected(position);
+                leftAdapter.setChangeSelected(position);
                 getDataFromNet(urls[position]);
                 //2.适配器刷新
-                adapter.notifyDataSetChanged();//getView
+                leftAdapter.notifyDataSetChanged();//getView
                 if(position != 0){
                     isFirst = false;
-                }else{
-                    isFirst = true;
                 }
             }
         });
-//        getDataFromNet(urls[0]);
+        getDataFromNet(urls[0]);
     }
 
     private void getDataFromNet(String url) {
