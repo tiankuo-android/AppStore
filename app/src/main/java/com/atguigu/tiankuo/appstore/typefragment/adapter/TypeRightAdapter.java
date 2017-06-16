@@ -86,7 +86,7 @@ public class TypeRightAdapter extends RecyclerView.Adapter {
 
     @Override
     public int getItemCount() {
-        return 2;
+        return 1 + hsl_hot_right.size();
     }
 
     @Override

@@ -44,6 +44,7 @@ public class CommunityFragment extends BaseFragment {
         super.initData();
         CommunityViewPagerAdapter adapter = new CommunityViewPagerAdapter(getFragmentManager());
         viewPager.setAdapter(adapter);
+
         tablayout.setupWithViewPager(viewPager);
         //如果有多个ViewPager页面
         tablayout.setTabMode(TabLayout.MODE_SCROLLABLE);

@@ -54,7 +54,6 @@ public class Constants {
         public static final String TAG_URL = BASE_URL_JSON + "TAG_URL.json";
 
 
-
         //发现页面-的-新特路径
         public static final String NEW_POST_URL = BASE_URL_JSON + "NEW_POST_URL.json";
         public static final String HOT_POST_URL = BASE_URL_JSON + "HOT_POST_URL.json";
