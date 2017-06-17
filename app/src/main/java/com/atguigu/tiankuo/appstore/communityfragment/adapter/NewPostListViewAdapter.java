@@ -13,7 +13,12 @@ import com.atguigu.tiankuo.appstore.R;
 import com.atguigu.tiankuo.appstore.communityfragment.domain.NewPostBean;
 import com.atguigu.tiankuo.appstore.domain.Constants;
 import com.bumptech.glide.Glide;
+import com.opendanmaku.DanmakuItem;
+import com.opendanmaku.DanmakuView;
+import com.opendanmaku.IDanmakuItem;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import butterknife.ButterKnife;
@@ -71,6 +76,25 @@ public class NewPostListViewAdapter extends BaseAdapter {
         holder.tvCommunityComments.setText(resultBean.getComments());
         //设置头像
         Glide.with(mContext).load(Constants.BASE_URL_IMAGE + resultBean.getAvatar()).into(holder.ibNewPostAvatar);
+
+        List<String> comment_list = resultBean.getComment_list();
+        if (comment_list != null && comment_list.size() > 0) {
+            //设置弹幕
+            List<IDanmakuItem> list = new ArrayList<>();
+            for (int i = 0; i < comment_list.size(); i++) {
+                IDanmakuItem item = new DanmakuItem(mContext, comment_list.get(i), holder.danmakuView.getWidth());
+                list.add(item);
+            }
+            //变成随机
+            Collections.shuffle(list);
+            holder.danmakuView.addItem(list, true);
+            holder.danmakuView.show();
+        } else {
+            //不设置
+            holder.danmakuView.hide();
+            holder.danmakuView.setVisibility(View.GONE);
+        }
+
         return convertView;
     }
 
@@ -91,6 +115,8 @@ public class NewPostListViewAdapter extends BaseAdapter {
         TextView tvCommunityLikes;
         @InjectView(R.id.tv_community_comments)
         TextView tvCommunityComments;
+        @InjectView(R.id.danmakuView)
+        DanmakuView danmakuView;
 
         ViewHolder(View view) {
             ButterKnife.inject(this, view);
