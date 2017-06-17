@@ -3,7 +3,6 @@ package com.atguigu.tiankuo.appstore.communityfragment.fragment;
 import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
 import com.atguigu.tiankuo.appstore.R;
@@ -12,15 +11,11 @@ import com.atguigu.tiankuo.appstore.communityfragment.adapter.NewPostListViewAda
 import com.atguigu.tiankuo.appstore.communityfragment.domain.NewPostBean;
 import com.atguigu.tiankuo.appstore.domain.Constants;
 import com.zhy.http.okhttp.OkHttpUtils;
-import com.zhy.http.okhttp.callback.Callback;
-
-import java.util.List;
+import com.zhy.http.okhttp.callback.StringCallback;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import okhttp3.Call;
-import okhttp3.Request;
-import okhttp3.Response;
 
 /**
  * 作者：田阔
@@ -28,30 +23,29 @@ import okhttp3.Response;
  * Created by Administrator on 2017/6/16 0016.
  */
 public class NewPostFragment extends BaseFragment {
-
+    private static final String TAG = NewPostFragment.class.getSimpleName();
     @InjectView(R.id.lv_new_post)
     ListView lvNewPost;
-    private List<NewPostBean.ResultBean> result;
-
+    private NewPostListViewAdapter adapter;
 
     @Override
     public View initView() {
-        View view = View.inflate(mContext, R.layout.fragment_new_post, null);
-        ButterKnife.inject(this, view);
-        return view;
+        View rootView = View.inflate(mContext, R.layout.fragment_new_post, null);
+        ButterKnife.inject(this, rootView);
+        return rootView;
     }
 
     @Override
     public void initData() {
         super.initData();
-        getDataFromNet();
+        getDataFromNet(Constants.NEW_POST_URL);
     }
 
-    private void getDataFromNet() {
+    private void getDataFromNet(String url) {
+        System.out.println("url==" + url);
         OkHttpUtils
                 .get()
-                .url(Constants.NEW_POST_URL)
-                .id(100)
+                .url(url)
                 .build()
                 .execute(new MyStringCallback());
     }
@@ -62,52 +56,22 @@ public class NewPostFragment extends BaseFragment {
         ButterKnife.reset(this);
     }
 
-    private class MyStringCallback extends Callback {
-
-        @Override
-        public void onBefore(Request request, int id) {
-            super.onBefore(request, id);
-        }
-
-        @Override
-        public void onAfter(int id) {
-            super.onAfter(id);
-        }
-
-        @Override
-        public Object parseNetworkResponse(Response response, int id) throws Exception {
-            return null;
-        }
-
+    private class MyStringCallback extends StringCallback {
         @Override
         public void onError(Call call, Exception e, int id) {
-            Log.e("TAG", "联网失败" + e.getMessage());
+            Log.e(TAG, "请求成功失败==" + e.getMessage());
         }
 
         @Override
-        public void onResponse(Object response, int id) {
-            switch (id) {
-                case 100:
-                    if (response != null) {
-                        processData(response);
-                    }
-                    break;
-                case 101:
-                    Toast.makeText(mContext, "https", Toast.LENGTH_SHORT).show();
-                    break;
-            }
+        public void onResponse(String response, int id) {
+            Log.e(TAG, "请求成功==");
+            processData(response);
         }
     }
 
-    private void processData(Object response) {
-        NewPostBean newPostBean = JSON.parseObject((String) response, NewPostBean.class);
-        result = newPostBean.getResult();
-
-        if (response != null) {
-            processData(response);
-            NewPostListViewAdapter adapter = new NewPostListViewAdapter(mContext, result);
-            lvNewPost.setAdapter(adapter);
-        }
-
+    private void processData(String response) {
+        NewPostBean newPostBean = JSON.parseObject(response,NewPostBean.class);
+        adapter = new NewPostListViewAdapter(mContext,newPostBean.getResult());
+        lvNewPost.setAdapter(adapter);
     }
 }

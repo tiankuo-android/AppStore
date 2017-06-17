@@ -23,6 +23,6 @@ public class HotPostFragment extends BaseFragment {
 
     @Override
     public void initData() {
-        textView.setText("新帖内容");
+        textView.setText("热帖内容");
     }
 }

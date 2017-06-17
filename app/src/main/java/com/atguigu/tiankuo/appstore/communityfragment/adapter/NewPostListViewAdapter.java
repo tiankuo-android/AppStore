@@ -26,9 +26,8 @@ import butterknife.InjectView;
  */
 
 public class NewPostListViewAdapter extends BaseAdapter {
-    private final List<NewPostBean.ResultBean> datas;
     private final Context mContext;
-    private List<NewPostBean.ResultBean> result;
+    private final List<NewPostBean.ResultBean> datas;
 
     public NewPostListViewAdapter(Context mContext, List<NewPostBean.ResultBean> result) {
         this.mContext = mContext;
@@ -61,7 +60,7 @@ public class NewPostListViewAdapter extends BaseAdapter {
             holder = (ViewHolder) convertView.getTag();
         }
 //        //根据位置得到对应的数据
-        NewPostBean.ResultBean resultBean = result.get(position);
+        NewPostBean.ResultBean resultBean = datas.get(position);
         holder.tvCommunityUsername.setText(resultBean.getUsername());
         Glide.with(mContext)
                 .load(Constants.BASE_URL_IMAGE + resultBean.getFigure())

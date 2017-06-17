@@ -29,21 +29,21 @@ public class CommunityFragment extends BaseFragment {
     @InjectView(R.id.view_pager)
     ViewPager viewPager;
     private TabLayout tablayout;
-
+    private CommunityViewPagerAdapter pagerAdapter;
 
     @Override
     public View initView() {
         View view = View.inflate(mContext, R.layout.fragment_community, null);
         ButterKnife.inject(this, view);
-        tablayout = (TabLayout) view.findViewById(R.id.tablayout);
+        tablayout = (TabLayout) view.findViewById(R.id.tab_layout);
         return view;
     }
 
     @Override
     public void initData() {
         super.initData();
-        CommunityViewPagerAdapter adapter = new CommunityViewPagerAdapter(getFragmentManager());
-        viewPager.setAdapter(adapter);
+        pagerAdapter = new CommunityViewPagerAdapter(getFragmentManager());
+        viewPager.setAdapter(pagerAdapter);
 
         tablayout.setupWithViewPager(viewPager);
         //如果有多个ViewPager页面
