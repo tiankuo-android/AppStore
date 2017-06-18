@@ -1,1 +1,1 @@
-include ':app', ':gradationscroll', ':GradationTitleBar-app'
+include ':app', ':gradationscroll'
