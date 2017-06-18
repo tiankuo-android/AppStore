@@ -26,6 +26,7 @@
             android:launchMode="singleTask" />
         <activity android:name=".app.WebViewActivity" />
         <activity android:name=".shoppingcartfragment.CallCenterActivity" />
+        <activity android:name=".userfragment.LoginActivity"></activity>
     </application>
 
 </manifest>
