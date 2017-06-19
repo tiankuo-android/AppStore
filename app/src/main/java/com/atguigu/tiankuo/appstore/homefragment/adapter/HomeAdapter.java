@@ -1,4 +1,4 @@
-package com.atguigu.tiankuo.appstore.homefragment;
+package com.atguigu.tiankuo.appstore.homefragment.adapter;
 
 import android.content.Context;
 import android.content.Intent;
@@ -16,8 +16,13 @@ import android.widget.Toast;
 
 import com.atguigu.tiankuo.appstore.R;
 import com.atguigu.tiankuo.appstore.app.GoodsInfoActivity;
+import com.atguigu.tiankuo.appstore.app.GoodsListActivity;
 import com.atguigu.tiankuo.appstore.app.WebViewActivity;
 import com.atguigu.tiankuo.appstore.domain.Constants;
+import com.atguigu.tiankuo.appstore.homefragment.domain.GoodsBean;
+import com.atguigu.tiankuo.appstore.homefragment.domain.HomeBean;
+import com.atguigu.tiankuo.appstore.homefragment.domain.WebViewBean;
+import com.atguigu.tiankuo.appstore.homefragment.utils.GlideImageLoader;
 import com.youth.banner.Banner;
 import com.youth.banner.listener.OnBannerListener;
 import com.zhy.magicviewpager.transformer.AlphaPageTransformer;
@@ -206,6 +211,9 @@ public class HomeAdapter extends RecyclerView.Adapter {
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     HomeBean.ResultBean.ChannelInfoBean channelInfoBean = channel_info.get(position);
                     Toast.makeText(mContext, "" + channelInfoBean.getChannel_name(), Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(mContext, GoodsListActivity.class);
+                        intent.putExtra("position", position);
+                        mContext.startActivity(intent);
                 }
             });
         }

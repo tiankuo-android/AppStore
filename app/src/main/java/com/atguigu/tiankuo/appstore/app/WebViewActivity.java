@@ -19,16 +19,16 @@ import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
 import com.atguigu.tiankuo.appstore.R;
-import com.atguigu.tiankuo.appstore.homefragment.GoodsBean;
-import com.atguigu.tiankuo.appstore.homefragment.H5Bean;
-import com.atguigu.tiankuo.appstore.homefragment.HomeAdapter;
-import com.atguigu.tiankuo.appstore.homefragment.WebViewBean;
+import com.atguigu.tiankuo.appstore.homefragment.domain.GoodsBean;
+import com.atguigu.tiankuo.appstore.homefragment.domain.H5Bean;
+import com.atguigu.tiankuo.appstore.homefragment.adapter.HomeAdapter;
+import com.atguigu.tiankuo.appstore.homefragment.domain.WebViewBean;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
 
-import static com.atguigu.tiankuo.appstore.homefragment.HomeAdapter.GOODS_BEAN;
+import static com.atguigu.tiankuo.appstore.homefragment.adapter.HomeAdapter.GOODS_BEAN;
 
 public class WebViewActivity extends AppCompatActivity {
 

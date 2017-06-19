@@ -1,4 +1,4 @@
-package com.atguigu.tiankuo.appstore.homefragment;
+package com.atguigu.tiankuo.appstore.homefragment.adapter;
 
 import android.content.Context;
 import android.view.View;
@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.atguigu.tiankuo.appstore.R;
 import com.atguigu.tiankuo.appstore.domain.Constants;
+import com.atguigu.tiankuo.appstore.homefragment.domain.HomeBean;
 import com.bumptech.glide.Glide;
 
 import java.util.List;

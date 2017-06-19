@@ -15,7 +15,7 @@ import android.widget.Toast;
 import com.atguigu.tiankuo.appstore.MainActivity;
 import com.atguigu.tiankuo.appstore.R;
 import com.atguigu.tiankuo.appstore.base.BaseFragment;
-import com.atguigu.tiankuo.appstore.homefragment.GoodsBean;
+import com.atguigu.tiankuo.appstore.homefragment.domain.GoodsBean;
 
 import java.util.List;
 

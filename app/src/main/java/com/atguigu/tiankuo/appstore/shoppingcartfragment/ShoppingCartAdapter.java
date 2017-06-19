@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import com.atguigu.tiankuo.appstore.R;
 import com.atguigu.tiankuo.appstore.domain.Constants;
-import com.atguigu.tiankuo.appstore.homefragment.GoodsBean;
+import com.atguigu.tiankuo.appstore.homefragment.domain.GoodsBean;
 import com.bumptech.glide.Glide;
 
 import java.util.List;

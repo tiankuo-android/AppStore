@@ -51,7 +51,7 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <com.atguigu.tiankuo.appstore.homefragment.ScrollViewContainer
+            <com.atguigu.tiankuo.appstore.homefragment.view.ScrollViewContainer
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
@@ -188,7 +188,7 @@
 
                 </ScrollView>
 
-            </com.atguigu.tiankuo.appstore.homefragment.ScrollViewContainer>
+            </com.atguigu.tiankuo.appstore.homefragment.view.ScrollViewContainer>
         </LinearLayout>
 
         <LinearLayout

@@ -4,7 +4,7 @@ import android.content.Context;
 import android.text.TextUtils;
 import android.util.SparseArray;
 
-import com.atguigu.tiankuo.appstore.homefragment.GoodsBean;
+import com.atguigu.tiankuo.appstore.homefragment.domain.GoodsBean;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 

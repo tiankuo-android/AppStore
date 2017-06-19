@@ -1,4 +1,4 @@
-package com.atguigu.tiankuo.appstore.homefragment;
+package com.atguigu.tiankuo.appstore.homefragment.domain;
 
 /**
  * 作者：田阔

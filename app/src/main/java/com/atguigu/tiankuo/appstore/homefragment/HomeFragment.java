@@ -13,6 +13,8 @@ import com.alibaba.fastjson.JSON;
 import com.atguigu.tiankuo.appstore.R;
 import com.atguigu.tiankuo.appstore.base.BaseFragment;
 import com.atguigu.tiankuo.appstore.domain.Constants;
+import com.atguigu.tiankuo.appstore.homefragment.adapter.HomeAdapter;
+import com.atguigu.tiankuo.appstore.homefragment.domain.HomeBean;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 

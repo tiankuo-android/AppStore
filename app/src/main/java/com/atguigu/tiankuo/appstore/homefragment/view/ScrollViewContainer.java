@@ -1,4 +1,4 @@
-package com.atguigu.tiankuo.appstore.homefragment;
+package com.atguigu.tiankuo.appstore.homefragment.view;
 
 import android.content.Context;
 import android.os.Handler;

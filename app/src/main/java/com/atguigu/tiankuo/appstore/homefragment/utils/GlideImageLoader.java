@@ -1,4 +1,4 @@
-package com.atguigu.tiankuo.appstore.homefragment;
+package com.atguigu.tiankuo.appstore.homefragment.utils;
 
 import android.content.Context;
 import android.widget.ImageView;
