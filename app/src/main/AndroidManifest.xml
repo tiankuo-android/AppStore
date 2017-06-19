@@ -27,7 +27,7 @@
         <activity android:name=".app.WebViewActivity" />
         <activity android:name=".shoppingcartfragment.CallCenterActivity" />
         <activity android:name=".userfragment.LoginActivity" />
-        <activity android:name=".app.GoodsListActivity"></activity>
+        <activity android:name=".app.GoodsListActivity" />
     </application>
 
 </manifest>

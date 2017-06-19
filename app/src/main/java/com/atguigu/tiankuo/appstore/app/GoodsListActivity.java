@@ -31,6 +31,7 @@ import com.atguigu.tiankuo.appstore.homefragment.domain.GoodsBean;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.ButterKnife;
@@ -202,6 +203,7 @@ public class GoodsListActivity extends AppCompatActivity {
     };
     private GoodsListAdapter goodsListAdapter;
     private List<TypeListBean.ResultBean.PageDataBean> page_data;
+    private ExpandableListViewAdapter expandableListViewAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -312,6 +314,7 @@ public class GoodsListActivity extends AppCompatActivity {
             case R.id.rl_select_type:
                 //类别筛选的页面
                 llTypeRoot.setVisibility(View.VISIBLE);
+                initExpandableListView();
                 showTypeLayout();
                 break;
             case R.id.btn_drawer_layout_cancel:
@@ -369,6 +372,48 @@ public class GoodsListActivity extends AppCompatActivity {
         llPriceRoot.setVisibility(View.GONE);
         llThemeRoot.setVisibility(View.GONE);
     }
+
+    private ArrayList<String> group;
+    private ArrayList<List<String>> child;
+    private void initExpandableListView() {
+
+        group = new ArrayList<>();
+        child = new ArrayList<>();
+        //去掉默认箭头
+//        expandableListView.setGroupIndicator(null);
+
+        //添加数据
+        addInfo("全部", new String[]{});
+        addInfo("上衣", new String[]{"古风", "和风", "lolita", "日常"});
+        addInfo("下装", new String[]{"日常", "泳衣", "汉风", "lolita", "创意T恤"});
+        addInfo("外套", new String[]{"汉风", "古风", "lolita", "胖次", "南瓜裤", "日常"});
+
+
+
+        //设置适配器
+        expandableListViewAdapter = new ExpandableListViewAdapter(this, group, child);
+        expandableListView.setAdapter(expandableListViewAdapter);
+
+
+
+    }
+
+    /**
+     * 添加数据信息
+     *
+     * @param g
+     * @param c
+     */
+    private void addInfo(String g, String[] c) {
+        group.add(g);
+        List<String> list = new ArrayList<String>();
+        for (int i = 0; i < c.length; i++) {
+            list.add(c[i]);
+        }
+        child.add(list);
+    }
+
+
 
     private class MyStringCallback extends StringCallback {
         @Override
