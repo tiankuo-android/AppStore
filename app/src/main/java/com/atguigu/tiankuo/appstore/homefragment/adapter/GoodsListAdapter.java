@@ -12,7 +12,6 @@ import com.atguigu.tiankuo.appstore.app.TypeListBean;
 import com.atguigu.tiankuo.appstore.domain.Constants;
 import com.bumptech.glide.Glide;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.ButterKnife;
@@ -34,9 +33,14 @@ public class GoodsListAdapter extends RecyclerView.Adapter<GoodsListAdapter.View
     private final GoodsListActivity mContext;
     private OnItemClickListener onItemClickListener;
 
-    public GoodsListAdapter(GoodsListActivity mContext, ArrayList<TypeListBean.ResultBean.PageDataBean> datas) {
+    public GoodsListAdapter(GoodsListActivity mContext, List<TypeListBean.ResultBean.PageDataBean> datas) {
         this.mContext = mContext;
         this.datas = datas;
+    }
+
+    @Override
+    public int getItemCount() {
+        return datas == null ? 0 : datas.size();
     }
 
     @Override
@@ -60,10 +64,7 @@ public class GoodsListAdapter extends RecyclerView.Adapter<GoodsListAdapter.View
 
     }
 
-    @Override
-    public int getItemCount() {
-        return 0;
-    }
+
 
     class ViewHolder extends RecyclerView.ViewHolder {
         @InjectView(iv_hot)
