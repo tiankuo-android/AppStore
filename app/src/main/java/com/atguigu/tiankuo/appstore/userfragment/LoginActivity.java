@@ -46,23 +46,6 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         ButterKnife.inject(this);
-
-        isShowPassword = !isShowPassword;
-        if(isShowPassword){
-            //显示
-            ibLoginVisible.setBackgroundResource(R.drawable.new_password_drawable_visible);
-            etLoginPwd.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
-            //光标定位到末尾
-            etLoginPwd.setSelection(etLoginPwd.length());
-
-        }else{
-            //隐藏
-            ibLoginVisible.setBackgroundResource(R.drawable.new_password_drawable_invisible);
-            etLoginPwd.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
-            //光标定位到末尾
-            etLoginPwd.setSelection(etLoginPwd.length());
-        }
-
     }
 
     @OnClick({R.id.ib_login_back, R.id.btn_login, R.id.tv_login_register, R.id.tv_login_forget_pwd, R.id.ib_weibo, R.id.ib_qq, R.id.ib_wechat})
@@ -89,6 +72,25 @@ public class LoginActivity extends AppCompatActivity {
             case R.id.ib_wechat:
                 Toast.makeText(this, "微信", Toast.LENGTH_SHORT).show();
                 break;
+        }
+    }
+
+    @OnClick(R.id.ib_login_visible)
+    public void onViewClicked() {
+        isShowPassword = !isShowPassword;
+        if (isShowPassword) {
+            //显示
+            ibLoginVisible.setBackgroundResource(R.drawable.new_password_drawable_visible);
+            etLoginPwd.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+            //光标定位到末尾
+            etLoginPwd.setSelection(etLoginPwd.length());
+
+        } else {
+            //隐藏
+            ibLoginVisible.setBackgroundResource(R.drawable.new_password_drawable_invisible);
+            etLoginPwd.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+            //光标定位到末尾
+            etLoginPwd.setSelection(etLoginPwd.length());
         }
     }
 }
