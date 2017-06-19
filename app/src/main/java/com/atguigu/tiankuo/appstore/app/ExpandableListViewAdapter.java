@@ -97,6 +97,7 @@ public class ExpandableListViewAdapter extends BaseExpandableListAdapter {
         } else {
             holder.imageView.setImageResource(R.drawable.filter_list_unselected);
         }
+
         return convertView;
 
     }

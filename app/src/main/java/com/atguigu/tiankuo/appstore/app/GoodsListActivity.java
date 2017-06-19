@@ -375,6 +375,7 @@ public class GoodsListActivity extends AppCompatActivity {
 
     private ArrayList<String> group;
     private ArrayList<List<String>> child;
+
     private void initExpandableListView() {
 
         group = new ArrayList<>();
@@ -389,12 +390,35 @@ public class GoodsListActivity extends AppCompatActivity {
         addInfo("外套", new String[]{"汉风", "古风", "lolita", "胖次", "南瓜裤", "日常"});
 
 
-
         //设置适配器
         expandableListViewAdapter = new ExpandableListViewAdapter(this, group, child);
         expandableListView.setAdapter(expandableListViewAdapter);
 
+        // 这里是控制如果列表没有孩子菜单不展开的效果
+        expandableListView.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
+            @Override
+            public boolean onGroupClick(ExpandableListView parent,
+                                        View v, int groupPosition, long id) {
+                if (child.get(groupPosition).isEmpty()) {// isEmpty没有
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        });
+        //设置点击孩子
+        expandableListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
 
+            @Override
+            public boolean onChildClick(ExpandableListView parent, View v,
+                                        int groupPosition, int childPosiion, long id) {
+                expandableListViewAdapter.isChildSelectable(groupPosition, childPosiion);
+                //刷新适配器
+                expandableListViewAdapter.notifyDataSetChanged();
+//                Toast.makeText(GoodsListActivity.this, "_" + group.get(groupPosition) + "_" + child.get(groupPosition).get(childPosiion) + "被点击了", Toast.LENGTH_SHORT).show();
+                return true;
+            }
+        });
 
     }
 
@@ -412,7 +436,6 @@ public class GoodsListActivity extends AppCompatActivity {
         }
         child.add(list);
     }
-
 
 
     private class MyStringCallback extends StringCallback {
